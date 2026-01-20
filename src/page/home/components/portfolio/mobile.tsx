@@ -29,7 +29,7 @@ export const PortfolioMobile = () => {
             children: <DataTwo />
         }, 
         {
-            image: ["/images/mobile/4.png", "/images/mobile/5.png", "/images/mobile/6.png", "/images/mobile/7.png"],
+                image: ["/images/mobile/4.png","/images/mobile/5.png", "/images/mobile/6.png", "/images/mobile/7.png","/images/mobile/50.png", "/images/mobile/28.png","/images/mobile/49.png"],
             name: <span className=" text-gradient-welcome">Другие экраны...</span>
         }
     ];
