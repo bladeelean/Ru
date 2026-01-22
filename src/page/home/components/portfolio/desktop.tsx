@@ -1,12 +1,13 @@
+import type { ReactNode } from "react";
 import { cn } from "@/common/utils";
 import Image from "next/image";
 
 export const PortfolioDesktop = () => {
   const desktopData: Array<{
     image: string | string[];
-    name?: React.ReactNode;
-    description?: React.ReactNode;
-    children?: React.ReactNode;
+    name?: ReactNode;
+    description?: ReactNode;
+    children?: ReactNode;
   }> = [
     {
       image: "/images/desktop/1.png",
@@ -30,14 +31,13 @@ export const PortfolioDesktop = () => {
       children: <DataOne />,
     },
 
-    // ✅ ДОБАВИЛИ "ДРУГИЕ ЭКРАНЫ..."
+    // "Другие экраны..."
     {
       image: [
         "/images/desktop/other/1.png",
         "/images/desktop/other/2.png",
         "/images/desktop/other/3.png",
         "/images/desktop/other/4.png",
-        // добавь сколько нужно
       ],
       name: <span className="text-gradient-welcome">Другие экраны...</span>,
       // description: "Фильтры, детализация, статусы, дополнительные таблицы.",
@@ -50,8 +50,11 @@ export const PortfolioDesktop = () => {
         const isGallery = Array.isArray(item.image);
 
         return (
-          <div key={idx + "desktop"} className={cn(isGallery && "space-y-8")}>
-            {/* Визуал */}
+          <div
+            key={idx + "desktop"}
+            className={cn(isGallery && "flex flex-col gap-16")}
+          >
+            {/* Визуал (как в мобилке: строка -> 1 экран, массив -> список экранов) */}
             {!isGallery ? (
               <Image
                 className="w-[80vw] object-cover h-[47.15rem]"
@@ -59,13 +62,14 @@ export const PortfolioDesktop = () => {
                 alt={typeof item.name === "string" ? item.name : "desktop-screen"}
                 width={1600}
                 height={1200}
+                priority={idx === 0}
               />
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-[80vw] mx-auto">
-                {item.image.map((src, i) => (
+              <div className="center gap-16 flex-col">
+                {(item.image as string[]).map((src, i) => (
                   <Image
-                    key={`${idx}-other-${i}`}
-                    className="w-full h-auto object-cover rounded-3xl"
+                    key={`${idx}-desktop-${i}`}
+                    className="w-[80vw] object-cover h-[47.15rem]"
                     src={src}
                     alt={`desktop-other-${i}`}
                     width={1600}
@@ -75,11 +79,9 @@ export const PortfolioDesktop = () => {
               </div>
             )}
 
-            {/* Текст */}
+            {/* Тексты */}
             {item.name && (
-              <p className={cn("text-4xl mt-8 font-bold text-center")}>
-                {item.name}
-              </p>
+              <p className="text-4xl mt-8 font-bold text-center">{item.name}</p>
             )}
             {item.description && (
               <p className="text-2xl mt-4 font-medium text-center text-[#FFFFFF8F]">
@@ -97,7 +99,7 @@ export const PortfolioDesktop = () => {
 
 const DataOne = () => {
   return (
-    <div className="bg-[#FFFFFF14] h-14 w-fit mx-auto px-10 center text-2xl font-semibold rounded-full mt-8 cursor-pointer ">
+    <div className="bg-[#FFFFFF14] h-14 w-fit mx-auto px-10 center text-2xl font-semibold rounded-full mt-8 cursor-pointer">
       Описания кейса пока нет
     </div>
   );
