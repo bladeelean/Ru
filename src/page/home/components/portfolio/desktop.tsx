@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { cn } from "@/common/utils";
 import Image from "next/image";
 
 export const PortfolioDesktop = () => {
@@ -30,8 +29,6 @@ export const PortfolioDesktop = () => {
         "Передо мной стояла задача заменить сводную статистику детализированной аналитикой, что со временем позволила выявить поведенческие зависимости и использовать их для повышения эффективности работы операторов.",
       children: <DataOne />,
     },
-
-    // "Другие экраны..."
     {
       image: [
         "/images/desktop/other/1.png",
@@ -40,59 +37,50 @@ export const PortfolioDesktop = () => {
         "/images/desktop/other/4.png",
       ],
       name: <span className="text-gradient-welcome">Другие экраны...</span>,
-      // description: "Фильтры, детализация, статусы, дополнительные таблицы.",
     },
   ];
 
   return (
     <div className="container space-y-20">
-      {desktopData.map((item, idx) => {
-        const isGallery = Array.isArray(item.image);
+      {desktopData.map((item, idx) => (
+        <div key={idx + "desktop"}>
+          {/* Визуал — как в мобилке */}
+          {Array.isArray(item.image) ? (
+            <div className="center gap-16 flex-col">
+              {item.image.map((src, i) => (
+                <Image
+                  key={`${idx}-desktop-${i}`}
+                  className="w-[80vw] object-cover h-[47.15rem]"
+                  src={src}
+                  alt={`desktop-other-${i}`}
+                  width={1600}
+                  height={1200}
+                />
+              ))}
+            </div>
+          ) : (
+            <Image
+              className="w-[80vw] object-cover h-[47.15rem]"
+              src={item.image}
+              alt={typeof item.name === "string" ? item.name : "desktop-screen"}
+              width={1600}
+              height={1200}
+              priority={idx === 0}
+            />
+          )}
 
-        return (
-          <div
-            key={idx + "desktop"}
-            className={cn(isGallery && "flex flex-col gap-16")}
-          >
-            {/* Визуал (как в мобилке: строка -> 1 экран, массив -> список экранов) */}
-            {!isGallery ? (
-              <Image
-                className="w-[80vw] object-cover h-[47.15rem]"
-                src={item.image}
-                alt={typeof item.name === "string" ? item.name : "desktop-screen"}
-                width={1600}
-                height={1200}
-                priority={idx === 0}
-              />
-            ) : (
-              <div className="center gap-16 flex-col">
-                {(item.image as string[]).map((src, i) => (
-                  <Image
-                    key={`${idx}-desktop-${i}`}
-                    className="w-[80vw] object-cover h-[47.15rem]"
-                    src={src}
-                    alt={`desktop-other-${i}`}
-                    width={1600}
-                    height={1200}
-                  />
-                ))}
-              </div>
-            )}
+          {item.name && (
+            <p className="text-4xl mt-8 font-bold text-center">{item.name}</p>
+          )}
+          {item.description && (
+            <p className="text-2xl mt-4 font-medium text-center text-[#FFFFFF8F]">
+              {item.description}
+            </p>
+          )}
 
-            {/* Тексты */}
-            {item.name && (
-              <p className="text-4xl mt-8 font-bold text-center">{item.name}</p>
-            )}
-            {item.description && (
-              <p className="text-2xl mt-4 font-medium text-center text-[#FFFFFF8F]">
-                {item.description}
-              </p>
-            )}
-
-            {item.children}
-          </div>
-        );
-      })}
+          {item.children}
+        </div>
+      ))}
     </div>
   );
 };
