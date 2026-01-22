@@ -36,10 +36,10 @@ export const PortfolioDesktop = () => {
     // ✅ "Другие экраны..."
     {
       image: [
-        "/images/desktop/other/1.png",
-        "/images/desktop/other/2.png",
-        "/images/desktop/other/3.png",
         "/images/desktop/other/4.png",
+        "/images/desktop/other/5.png",
+        "/images/desktop/other/6.png",
+        "/images/desktop/other/7.png",
       ],
       name: <span className="text-gradient-welcome">Другие экраны...</span>,
     },
