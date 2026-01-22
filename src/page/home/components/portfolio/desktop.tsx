@@ -37,6 +37,7 @@ export const PortfolioDesktop = () => {
     {
       image: [
         "/images/desktop/14.png",
+        "/images/desktop/16.png",
         "/images/desktop/11.png",
         "/images/desktop/9.png",
         "/images/desktop/10.png",
