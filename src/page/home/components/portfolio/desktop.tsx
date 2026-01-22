@@ -42,7 +42,6 @@ export const PortfolioDesktop = () => {
         "/images/desktop/10.png",
         "/images/desktop/6.png",
         "/images/desktop/7.png",
-        "/images/desktop/12.png",
       ],
       name: <span className="text-gradient-welcome">Другие экраны...</span>,
     },
